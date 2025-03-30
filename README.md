@@ -117,3 +117,55 @@ fleet_management_system/
 
 └── README.md  # Project documentation
 
+## How to Use the System
+
+Spawning Robots: Click on any vertex (location) to spawn a robot. Each robot will have a unique identifier displayed.
+
+Assigning Tasks: After spawning a robot, click on the robot and then click on the destination vertex to assign a task. The robot will begin navigating immediately.
+
+Traffic Management: Robots will avoid collisions by negotiating traffic. If a robot encounters an occupied lane, it will wait until the lane is free.
+
+Monitoring Robot Status: The robot's current status (moving, waiting, charging, or task complete) will be visually indicated on the GUI.
+
+Real-Time Logs: All robot actions, path choices, and task completions are logged in fleet_logs.txt and can be optionally viewed in the GUI.
+
+## Key GUI Interactions
+
+Spawn Robot: Click on a vertex to spawn a robot at that location.
+
+Assign Task: Click on a robot, then click on a destination vertex to assign a navigation task.
+
+View Robot Status: The robot’s status (such as moving, waiting, charging, or task complete) is displayed in real-time on the GUI.
+
+Traffic Management: Robots dynamically adjust their movement to avoid lane collisions and intersections where traffic is blocked.
+
+## Navigation Graph (nav_graph.json)
+
+{
+    "coordinates": {
+      "A": [0, 0],
+      "B": [1, 0],
+      "C": [2, 0],
+      "D": [1, 1],
+      "E": [2, 1],
+      "F": [3, 1]
+    },
+    "graph": {
+      "A": {
+        "B": 1,
+        "C": 2
+      },
+      "B": {
+        "D": 1
+      },
+      "C": {
+        "E": 2
+      },
+      "D": {
+        "F": 3
+      },
+      "E": {},
+      "F": {}
+    }
+  }
+  
