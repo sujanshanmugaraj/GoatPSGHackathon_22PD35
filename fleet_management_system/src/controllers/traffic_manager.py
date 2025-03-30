@@ -1,12 +1,10 @@
 
-# src/controllers/traffic_manager.py
-
 class TrafficManager:
     def __init__(self):
         """
         Initialize the Traffic Manager with an empty lane management system.
         """
-        self.lane_occupancy = {}  # Tracks which lanes are occupied
+        self.lane_status = {}  # Tracks the status of each lane
 
     def request_lane_access(self, start_node, end_node, robot_id):
         """
@@ -16,38 +14,44 @@ class TrafficManager:
         lane_key = (start_node, end_node)
         reverse_lane_key = (end_node, start_node)
 
-        # Check if the lane is available (or if the reverse lane is already occupied)
-        if lane_key not in self.lane_occupancy and reverse_lane_key not in self.lane_occupancy:
-            self.lane_occupancy[lane_key] = robot_id
-            print(f"✅ Robot {robot_id} granted access to lane from {start_node} to {end_node}.")
-            return True
-        else:
-            print(f"🚧 Robot {robot_id} waiting. Lane from {start_node} to {end_node} is occupied.")
+        # Check if the lane or its reverse is occupied
+        if self.lane_status.get(lane_key, "free") != "free" or self.lane_status.get(reverse_lane_key, "free") != "free":
+            print(f"🚫 Lane from {start_node} to {end_node} is occupied. Robot {robot_id} cannot proceed.")
             return False
 
-    def release_lane(self, start_node, end_node, robot_id):
+        # Grant access to the lane
+        self.lane_status[lane_key] = f"Occupied by {robot_id}"
+        print(f"✅ Robot {robot_id} granted access to lane from {start_node} to {end_node}.")
+        return True
+
+    def release_lane(self, start_node, end_node, robot_id, robot_status):
         """
-        Release the lane after the robot completes its movement.
+        Release a lane once a robot has completed its task.
         """
         lane_key = (start_node, end_node)
 
-        # Ensure the robot is the owner of the lane before releasing it
-        if lane_key in self.lane_occupancy and self.lane_occupancy[lane_key] == robot_id:
-            # Release the lane by removing it from the lane_occupancy dictionary
-            del self.lane_occupancy[lane_key]
-            print(f"🔓 Robot {robot_id} released lane from {start_node} to {end_node}.")
+        if lane_key in self.lane_status and self.lane_status[lane_key] == f"Occupied by {robot_id}":
+            if robot_status == "task complete" or robot_status == "done":
+                self.lane_status[lane_key] = "free"
+                print(f"🔓 Robot {robot_id} successfully released lane from {start_node} to {end_node}.")
+            else:
+                print(f"⚠️ Robot {robot_id} cannot release lane. Status: {robot_status}")
         else:
-            # This error happens when the robot either tries to release a lane that it doesn't own,
-            # or the lane has already been cleared.
-            print(f"⚠️ Error: Robot {robot_id} tried to release a lane it doesn't own or the lane is no longer assigned.")
+            print(f"⚠️ Error: Lane from {start_node} to {end_node} is not occupied by Robot {robot_id}.")
 
     def get_lane_status(self):
         """
         Display the current lane occupancy status.
         """
-        if not self.lane_occupancy:
+        if not self.lane_status:
             print("🌿 All lanes are free.")
         else:
             print("🚦 Current Lane Occupancy:")
-            for lane, robot in self.lane_occupancy.items():
-                print(f"  {lane[0]} → {lane[1]}: Occupied by Robot {robot}")
+            for (start, end), status in self.lane_status.items():
+                print(f"  {start} → {end}: {status}")
+
+    def get_traffic_data(self):
+        """
+        Get lane status as a dictionary for external use (e.g., dashboards).
+        """
+        return self.lane_status

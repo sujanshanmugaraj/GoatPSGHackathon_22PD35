@@ -1,58 +1,103 @@
-from src.gui.fleet_gui import FleetManagementApp
+import logging
+import time
+from tkinter import Tk
 from src.controllers.fleet_manager import FleetManager
 from src.controllers.traffic_manager import TrafficManager
-from src.models.robot import Robot
-import tkinter as tk
+from src.gui.fleet_gui import FleetManagementApp  # Assuming you have this GUI file
 
 class FleetSimulation:
     def __init__(self):
-        # Initialize the traffic manager and fleet manager
+        """Initialize the FleetSimulation with the FleetManager, TrafficManager, and GUI components."""
+        # Initialize traffic manager and fleet manager
         self.traffic_manager = TrafficManager()
         self.fleet_manager = FleetManager()
 
         # Initialize the Tkinter window for GUI
-        self.root = tk.Tk()
-        # Initialize the FleetManagementApp with the root Tk window and the traffic and fleet managers
+        self.root = Tk()
+        self.root.title("Fleet Management Simulation")
+        
+        # Initialize the fleet management app GUI
         self.app = FleetManagementApp(self.root, self.fleet_manager, self.traffic_manager)
+        
+        # Set up logging
+        self.setup_logging()
+
+    def setup_logging(self):
+        """Set up logging to both file and console."""
+        # Create a logger
+        self.logger = logging.getLogger('FleetSimulationLogger')
+        self.logger.setLevel(logging.DEBUG)
+
+        # Log to a file
+        file_handler = logging.FileHandler(r'C:\Users\Sujan.S\OneDrive\Documents\GitHub\GoatPSGHackathon_-22PD35-\fleet_management_system\logs\fleet_logs.txt', encoding='utf-8')
+        file_handler.setLevel(logging.DEBUG)
+        file_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        file_handler.setFormatter(file_format)
+        self.logger.addHandler(file_handler)
+
+        # Log to console as well (optional, for immediate feedback)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)  # Info level to keep console clean
+        console_handler.setFormatter(file_format)
+        self.logger.addHandler(console_handler)
 
     def run_simulation(self):
-        # Create robots and assign them tasks
-        robot1 = Robot(start_node="A", traffic_manager=self.traffic_manager)
-        robot2 = Robot(start_node="B", traffic_manager=self.traffic_manager)
+        """Runs the simulation, handling robot movements, task assignments, and GUI updates."""
+        self.logger.info("Starting simulation...")  # Removed emoji for console compatibility
+        
+        # Spawn robots at initial positions with unique robot IDs
+        self.fleet_manager.spawn_robot("A", "Robot-1")  # Robot-1 at node A
+        self.fleet_manager.spawn_robot("B", "Robot-2")  # Robot-2 at node B
 
-        # Simulate robots' movements
-        lane1_assigned = self.traffic_manager.request_lane_access("A", "C", robot1.id)  # Request lane for robot1
-        lane2_assigned = self.traffic_manager.request_lane_access("B", "D", robot2.id)  # Request lane for robot2
+        # Add tasks with priorities
+        self.fleet_manager.add_task("A", "C", priority=1)
+        self.fleet_manager.add_task("B", "D", priority=1)
+        self.fleet_manager.add_task("C", "E", priority=2)
+        self.fleet_manager.add_task("D", "F", priority=3)
 
-        if lane1_assigned and lane2_assigned:
-            # Assign tasks to the robots
-            robot1.assign_task("C")  # Robot1 moving from A to C
-            robot2.assign_task("D")  # Robot2 moving from B to D
+        # Assign initial tasks
+        self.fleet_manager.assign_tasks(self.traffic_manager)
 
-            # Simulate robots' movements
-            robot1.update_position("B")  # Robot1 moves from A to B (doesn't reach destination yet)
-            robot1.update_position("C")  # Robot1 reaches its destination (C), task complete
+        # Simulation loop with a step limit to avoid infinite loops
+        max_steps = 100
+        step_count = 0
 
-            robot2.update_position("C")  # Robot2 moves from B to C (doesn't reach destination yet)
-            robot2.update_position("D")  # Robot2 reaches its destination (D), task complete
+        while any(robot.status in ["moving", "idle"] for robot in self.fleet_manager.robots):
+            if step_count >= max_steps:
+                self.logger.info("Simulation stopped: Exceeded maximum steps.")
+                break
 
-            # Check status of robots
-            print(robot1.get_status())  # Robot1 status
-            print(robot2.get_status())  # Robot2 status
+            for robot in self.fleet_manager.robots:
+                if robot.status == "moving":
+                    robot.update_position()  # Update robot's position based on its movement
+                    self.logger.debug(f"Robot {robot.id} moved to {robot.position}")  # Use robot.id instead of robot.name
+                elif robot.status == "task complete":
+                    robot.status = "done"  # Mark robot as done after completing the task
+                    self.logger.info(f"Robot {robot.id} has completed its task at {robot.position}")  # Use robot.id instead of robot.name
 
-            # Release lanes once robots complete their tasks (ensure task is complete before release)
-            self.traffic_manager.release_lane("A", "C", robot1.id)  # Robot1 releases the lane from A to C
-            self.traffic_manager.release_lane("B", "D", robot2.id)  # Robot2 releases the lane from B to D
+            # Monitor and reassign tasks if necessary (can handle task priority logic here)
+            self.fleet_manager.monitor_and_reassign_tasks(self.traffic_manager)
 
-        # Run the GUI loop
+            # Update GUI visualization
+            self.app.update_visualization()
+
+            step_count += 1
+            time.sleep(0.5)  # Adjust for visualization speed (slower = more visible movements)
+
+        # Print final status of robots
+        for robot in self.fleet_manager.robots:
+            self.logger.info(robot.get_status())
+
+        self.logger.info("Simulation completed.")
+
+        # Start GUI main loop
         self.root.mainloop()
 
-
-# Main function to initialize and run the simulation
+# Main function to start the simulation
 def main():
-    # Create and run the simulation
     simulation = FleetSimulation()
     simulation.run_simulation()
 
 if __name__ == "__main__":
     main()
+#successfully committed!

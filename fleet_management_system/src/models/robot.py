@@ -1,69 +1,111 @@
-import uuid
+
+
+import time
+from src.utils.helpers import a_star
+from src.models.nav_graph import NavGraph
 
 class Robot:
-    def __init__(self, start_node, traffic_manager):
+    def __init__(self, robot_id, start_node, nav_graph):
         """
-        Initialize a robot with a unique ID, starting position, and the traffic manager.
+        Initialize the robot with an ID, start node, and a navigation graph.
         """
-        self.id = str(uuid.uuid4())[:8]  # Short unique ID
+        self.id = robot_id
         self.position = start_node
-        self.start_node = start_node  # Track the start node
+        self.start_node = start_node
         self.destination = None
-        self.status = "idle"  # Possible statuses: idle, moving, waiting, charging, task complete
-        self.traffic_manager = traffic_manager  # Assigning traffic_manager to robot
-        self.assigned_lane = None  # Track the lane assigned to this robot
+        self.status = "idle"
+        self.nav_graph = nav_graph  # Store the navigation graph
+        self.path = []
+        self.last_position = start_node
+        self.last_movement_time = time.time()
+        self.task_completed = False
 
     def assign_task(self, destination):
         """
-        Assign a destination to the robot if it is idle.
+        Assign a task to the robot by setting its destination and planning a path using A*.
         """
-        if self.status == "idle":
-            self.destination = destination
-            self.status = "moving"
-            print(f"🚀 Robot {self.id} assigned to move from {self.position} to {self.destination}")
-            
-            # Request lane access before starting movement
-            if not self.traffic_manager.request_lane_access(self.position, self.destination, self.id):
-                self.status = "waiting"  # Set the robot to waiting if lane is occupied
-            else:
-                self.status = "moving"
-                self.assigned_lane = (self.position, self.destination)  # Save the assigned lane
-        elif self.status == "moving":
-            print(f"⚠️ Robot {self.id} is currently moving to {self.destination}. Please wait.")
-        else:
-            print(f"⚠️ Robot {self.id} is busy. Status: {self.status}")
+        if self.status == "moving":
+            print(f"⚠️ Robot {self.id} is already moving. Cannot assign a new task.")
+            return
 
-    def update_position(self, new_position):
-        """
-        Update the robot's position and check if the task is complete.
-        """
-        self.position = new_position
-        print(f"📍 Robot {self.id} moved to {self.position}")
+        print(f"🚀 Robot {self.id} assigned to move from {self.position} to {destination}")
 
-        if self.position == self.destination:
+        # Ensure nodes are properly checked for names
+        name_to_index = {data['name']: i for i, data in self.nav_graph.graph.nodes(data=True) if 'name' in data}
+
+        # Debugging output to see available nodes
+        print("🔎 Available Nodes:", name_to_index)
+        print("🔎 Checking if node exists: Start -", self.position, "Destination -", destination)
+
+        if self.position not in name_to_index:
+            print(f"❗ Invalid start node: {self.position}")
+            return
+        
+        if destination not in name_to_index:
+            print(f"❗ Invalid destination: {destination}")
+            return
+
+        start_index = name_to_index[self.position]
+        end_index = name_to_index[destination]
+
+        # Plan path using A* algorithm
+        path = a_star(self.nav_graph.graph, self.nav_graph.get_coordinates(), start_index, end_index)
+
+        if not path:
+            print(f"❗ No path found from {self.position} to {destination}")
+            return
+
+        print(f"🛤️ Path for Robot {self.id}: {path}")
+        self.status = "moving"
+        self.path = path
+        self.destination = destination
+        self.task_completed = False
+
+    def update_position(self):
+        """
+        Update the robot's position along its path.
+        """
+        if self.status != "moving" or not self.path or self.task_completed:
+            return
+
+        # Move to the next node
+        next_node = self.path.pop(0)
+        print(f"📍 Robot {self.id} moved to {next_node}")
+        self.position = next_node
+
+        # Check if the robot reached its destination
+        if not self.path and self.status != "task complete" and not self.task_completed:
             self.status = "task complete"
-            print(f"✅ Robot {self.id} has completed its task at {self.destination}.")
-            self.destination = None  # Clear the destination after completion
-            self.release_lane()  # Release the lane after completing the task
-        else:
-            self.status = "moving"
-            print(f"🚙 Robot {self.id} is still moving towards {self.destination}.")
+            self.destination = None
+            print(f"✅ Robot {self.id} has completed its task at {self.position}")
+            self.task_completed = True
 
-    def release_lane(self):
+    def detect_stuck(self):
         """
-        Release the lane after the robot completes its task.
+        Detect if the robot is stuck by checking for lack of movement.
         """
-        if self.status == "task complete" and self.assigned_lane:
-            # Release the lane in the traffic manager
-            start_node, end_node = self.assigned_lane
-            self.traffic_manager.release_lane(start_node, end_node, self.id)
-            print(f"✅ Robot {self.id} has released the lane from {start_node} to {end_node}")
-            self.assigned_lane = None  # Clear the assigned lane after releasing it
+        if self.status == "moving" and self.position == self.last_position:
+            if time.time() - self.last_movement_time > 15:
+                print(f"⏳ Robot {self.id} is stuck at {self.position}")
+                return True
         else:
-            print(f"⚠️ Robot {self.id} is not ready to release lane. Status: {self.status}")
+            self.last_position = self.position
+            self.last_movement_time = time.time()
+        return False
+
+    def reset_for_new_task(self):
+        """
+        Reset the robot to an idle state, ready for a new task.
+        """
+        if self.status == "task complete":
+            print(f"🔄 Robot {self.id} is now idle and ready for a new task.")
+            self.status = "idle"
+            self.task_completed = False
+            self.position = self.start_node
+            self.path = []
 
     def get_status(self):
         """
-        Get the current status of the robot.
+        Return the current status of the robot.
         """
-        return f"🤖 Robot {self.id} is at {self.position}, Status: {self.status}"
+        return f"Robot {self.id}: Status={self.status}, Position={self.position}, Destination={self.destination if self.destination else 'N/A'}"

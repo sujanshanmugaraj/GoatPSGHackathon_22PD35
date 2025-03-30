@@ -1,0 +1,14 @@
+2025-03-30 20:07:43,163 - INFO - Starting simulation...
+2025-03-30 20:07:43,164 - DEBUG - Robot Robot-1 moved to A
+2025-03-30 20:07:43,164 - DEBUG - Robot Robot-2 moved to B
+2025-03-30 20:07:44,227 - INFO - Robot Robot-1: Status=task complete, Position=C, Destination=N/A
+2025-03-30 20:07:44,228 - INFO - Robot Robot-2: Status=task complete, Position=D, Destination=N/A
+2025-03-30 20:07:44,228 - INFO - Simulation completed.
+2025-03-30 20:08:18,378 - INFO - Starting simulation...
+2025-03-30 20:08:18,378 - DEBUG - Robot Robot-1 moved to A
+2025-03-30 20:08:18,378 - DEBUG - Robot Robot-2 moved to B
+2025-03-30 20:08:19,307 - INFO - Robot Robot-1: Status=task complete, Position=C, Destination=N/A
+2025-03-30 20:08:19,307 - INFO - Robot Robot-2: Status=task complete, Position=D, Destination=N/A
+2025-03-30 20:08:19,307 - INFO - Simulation completed.
+2025-03-30 20:10:48,780 - INFO - Starting simulation...
+2025-03-30 20:10:48,782 - DEBUG - Robot Robot-1 moving from A...
