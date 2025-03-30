@@ -199,9 +199,10 @@ To stop the simulation, you can simply close the GUI window. The simulation will
 
 The simulation will continuously log robot actions, path choices, waiting conditions, and task completions into the fleet_logs.txt file. This file is located in the logs/ directory.
 
-# Sample Log Output:
+### Sample Log Output:
 
 ![image](https://github.com/user-attachments/assets/54958695-3cd0-477b-a312-1e420e9e1538)
+
 
 ## Acknowledgments
 
@@ -210,6 +211,7 @@ The simulation will continuously log robot actions, path choices, waiting condit
 -**Dijkstra's Algorithm**: Used for pathfinding.
 
 -**Open-source libraries**: Various libraries for logging and pathfinding.
+
 
 ## Screenshots and Visuals
 
@@ -289,4 +291,17 @@ In the image, we can see a successful run of the Fleet Management System simulat
 - **Robot-1** again completed its task at **C**.
 - **Robot-2** completed its task at **D** once more.
 - **Robot-1** completed its task at **C** again.
+
+
+![Screenshot (237)](https://github.com/user-attachments/assets/b3807be3-8aae-4494-b76a-9d1564d96295)
+
+![Screenshot (238)](https://github.com/user-attachments/assets/a3dcb32b-9283-4da3-8871-ed7af609e6bb)
+
+![Screenshot (239)](https://github.com/user-attachments/assets/473eb68e-5ccd-4d1b-a69e-18d558437056)
+
+![Screenshot (240)](https://github.com/user-attachments/assets/2395e1bb-38d9-4c57-84c1-bf5a96fe17c3)
+
+
+
+
 
