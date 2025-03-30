@@ -1,6 +1,6 @@
 # Fleet Management System with Traffic Negotiation for Multi-Robots
 
-## Overview
+## Overview:
 
 The Fleet Management System is a simulation of a fleet of robots that perform tasks based on priority while moving along a network of nodes. The system includes a graphical user interface (GUI) that visualizes the robots' movements and task completions. It also incorporates logging for robot actions, path choices, waiting conditions, and task completions.
 
@@ -63,7 +63,7 @@ Logging module (for logging robot actions and status)
 
 Custom modules for FleetManager and TrafficManager
 
-## Project Structure
+## Project Structure:
 
 ![image](https://github.com/user-attachments/assets/9231a901-bcf7-4c68-b87f-34ed99f45bf1)
 
@@ -71,7 +71,7 @@ Here's a section on how to use the Fleet Management System, which you can add to
 
 ---
 
-## How to Use the Fleet Management System
+## How to Use the Fleet Management System?
 
 ## 1. **System Setup and Installation**
 Before you can start using the Fleet Management System, you need to set it up on your local machine. Follow these steps:
@@ -139,7 +139,7 @@ To stop the simulation, you can simply close the GUI window. The simulation will
 
 
 
-## Navigation Graph (nav_graph.json)
+## Navigation Graph (nav_graph.json):
 
 
 {
@@ -195,7 +195,7 @@ To stop the simulation, you can simply close the GUI window. The simulation will
     
   }
   
-## Logs and Monitoring
+## Logs and Monitoring:
 
 The simulation will continuously log robot actions, path choices, waiting conditions, and task completions into the fleet_logs.txt file. This file is located in the logs/ directory.
 
@@ -204,7 +204,7 @@ The simulation will continuously log robot actions, path choices, waiting condit
 ![image](https://github.com/user-attachments/assets/54958695-3cd0-477b-a312-1e420e9e1538)
 
 
-## Acknowledgments
+## Acknowledgments:
 
 -**Tkinter**: Used for building the GUI.
 
@@ -213,7 +213,7 @@ The simulation will continuously log robot actions, path choices, waiting condit
 -**Open-source libraries**: Various libraries for logging and pathfinding.
 
 
-## Screenshots and Visuals
+## Screenshots and Visuals:
 
 ![image](https://github.com/user-attachments/assets/ef9c7c6a-50f7-43af-8ceb-33626ca24a55)
 
