@@ -66,3 +66,14 @@ The GUI provides real-time feedback on robot movements, task statuses, and traff
 
 The system immediately notifies the user when a requested path or vertex is blocked or occupied, preventing the assignment of tasks to already congested paths.
 
+
+## Technologies used
+
+Python 3.x
+
+Tkinter (for GUI)
+
+Logging module (for logging robot actions and status)
+
+Custom modules for FleetManager and TrafficManager
+
