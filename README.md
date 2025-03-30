@@ -303,5 +303,24 @@ In the image, we can see a successful run of the Fleet Management System simulat
 
 
 
+1. **Graphical Representation of the Environment:**  
+   - Nodes (A, B, C, D, E, F) represent locations.  
+   - Lanes show possible robot movement paths.  
+   - Robots are visually distinct and placed at specific vertices.  
+
+2. **Robot Movements & Task Completion:**  
+   - Robots navigate the assigned paths dynamically.  
+   - Console logs show real-time updates (e.g., "Robot-2 has completed its task at D").  
+
+3. **Simulation Controls:**  
+   - "Start Simulation" button initiates robot movement.  
+   - "Reset" button resets the environment.  
+
+4. **Logging System:**  
+   - The lower section logs robot activities such as task completions and movement updates.  
+
+
+
+
 
 
