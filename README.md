@@ -79,43 +79,7 @@ Custom modules for FleetManager and TrafficManager
 
 ## Project Structure
 
-fleet_management_system/
-
-├── data/
-
-│   └── nav_graph.json  # JSON file describing the environment (vertices and lanes)
-
-├── src/
-
-│   ├── models/
-
-│   │   ├── nav_graph.py  # Code to parse and represent the navigation graph
-
-│   │   └── robot.py  # Robot behaviors and attributes
-
-│   ├── controllers/
-
-│   │   ├── fleet_manager.py  # Manages robot tasks and states
-
-│   │   └── traffic_manager.py  # Handles traffic negotiation and collision avoidance
-
-│   ├── gui/
-
-│   │   └── fleet_gui.py  # Interactive GUI using Tkinter
-
-│   ├── utils/
-
-│   │   └── helpers.py  # Supporting functions like pathfinding algorithms
-
-│   ├── logs/
-
-│   │   └── fleet_logs.txt  # Log file for robot actions and statuses
-
-│   └── main.py  # Application entry point
-
-├── requirements.txt 
-
-└── README.md  # Project documentation
+![image](https://github.com/user-attachments/assets/9231a901-bcf7-4c68-b87f-34ed99f45bf1)
 
 ## How to Use the System
 
@@ -195,6 +159,23 @@ Traffic Management: Robots dynamically adjust their movement to avoid lane colli
     
   }
   
+## Logs and Monitoring
+
+The simulation will continuously log robot actions, path choices, waiting conditions, and task completions into the fleet_logs.txt file. This file is located in the logs/ directory.
+
+# Sample Log Output:
+
+![image](https://github.com/user-attachments/assets/54958695-3cd0-477b-a312-1e420e9e1538)
+
+## Acknowledgments
+
+Tkinter: Used for building the GUI.
+
+Dijkstra's Algorithm: Used for pathfinding.
+
+Open-source libraries: Various libraries for logging and pathfinding.
+
+
 
   
 
