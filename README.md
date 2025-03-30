@@ -141,31 +141,63 @@ Traffic Management: Robots dynamically adjust their movement to avoid lane colli
 
 ## Navigation Graph (nav_graph.json)
 
+
 {
+
     "coordinates": {
+    
       "A": [0, 0],
+      
       "B": [1, 0],
+      
       "C": [2, 0],
+      
       "D": [1, 1],
+      
       "E": [2, 1],
+      
+      
       "F": [3, 1]
     },
+    
+    
     "graph": {
+    
       "A": {
+      
         "B": 1,
+        
         "C": 2
       },
+      
+      
+      
       "B": {
+      
         "D": 1
       },
+      
+      
       "C": {
+      
         "E": 2
       },
+      
+      
       "D": {
+      
         "F": 3
       },
+      
+      
+      
       "E": {},
+      
       "F": {}
     }
+    
   }
   
+
+  
+
