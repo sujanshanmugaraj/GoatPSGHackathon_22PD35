@@ -3,8 +3,56 @@
 ## Overview
 
 The Fleet Management System is a simulation of a fleet of robots that perform tasks based on priority while moving along a network of nodes. The system includes a graphical user interface (GUI) that visualizes the robots' movements and task completions. It also incorporates logging for robot actions, path choices, waiting conditions, and task completions.
- 
-## Features:
+
+
+## **Features:**
+1. **Robot Spawning and Task Assignment**:
+   - Users can spawn robots at specific locations (vertices) in the environment via the GUI.
+   - Tasks are assigned to robots through the GUI by selecting robots and destination vertices interactively.
+
+2. **Robot Navigation**:
+   - Robots navigate through predefined paths (lanes) between vertices based on the tasks assigned to them.
+   - Real-time robot movement is visualized on the GUI, showing progress along the path.
+
+3. **Traffic Negotiation & Collision Avoidance**:
+   - Robots dynamically negotiate traffic, avoiding lane collisions and managing congestion.
+   - Robots can wait or queue at blocked lanes or intersections to ensure smooth movement.
+   - Lane occupation is continuously checked to prevent path conflicts.
+
+4. **Real-Time Robot Status Visualization**:
+   - Robots' statuses are visually indicated in the GUI, showing whether they are moving, waiting, charging, or have completed tasks.
+   - Robot status updates are logged in real-time for user visibility.
+
+5. **Task Management**:
+   - Tasks are assigned based on priorities, ensuring high-priority tasks are completed first.
+   - Robots can complete tasks and report their status (task complete, waiting, moving).
+
+6. **Dynamic Task Reassignment**:
+   - If a task is blocked (due to traffic congestion or a lane being occupied), the system dynamically monitors and reassigns tasks to available robots.
+   - Task reassignments are handled based on real-time traffic and robot availability.
+
+7. **Environment Visualization**:
+   - The environment, including vertices and lanes, is visually displayed on the GUI.
+   - Vertices are interactable (clickable) to spawn robots or assign tasks, providing a clear interface for users.
+
+8. **Real-Time Logging**:
+   - All robot actions, movements, task completions, and traffic negotiations are logged to a file (`fleet_logs.txt`).
+   - Logs include detailed information such as path choices, robot status updates, and waiting conditions for each robot.
+
+9. **Interactive GUI**:
+   - Users can dynamically interact with the GUI to spawn new robots and assign tasks without interrupting ongoing robot activities.
+   - The GUI provides real-time feedback on robot movements, task statuses, and traffic conditions.
+
+10. **User Alerts for Occupancy and Conflict**:
+    - The system immediately notifies the user when a requested path or vertex is blocked or occupied, preventing the assignment of tasks to already congested paths.
+
+## **Key Highlights:**
+- **Dynamic robot task assignments** with real-time updates and status changes.
+- **Efficient traffic management** ensuring no robot collides while navigating through the environment.
+- **Interactive user interface** that allows for easy robot management and task assignments.
+- **Comprehensive logging** of all robot actions and task statuses for monitoring and analysis.
+
+
 
 ### Robot Spawning and Task Assignment:
 
