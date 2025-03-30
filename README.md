@@ -155,8 +155,7 @@ Traffic Management: Robots dynamically adjust their movement to avoid lane colli
       "D": [1, 1],
       
       "E": [2, 1],
-      
-      
+   
       "F": [3, 1]
     },
     
@@ -169,7 +168,6 @@ Traffic Management: Robots dynamically adjust their movement to avoid lane colli
         
         "C": 2
       },
-      
       
       
       "B": {
@@ -188,8 +186,7 @@ Traffic Management: Robots dynamically adjust their movement to avoid lane colli
       
         "F": 3
       },
-      
-      
+     
       
       "E": {},
       
