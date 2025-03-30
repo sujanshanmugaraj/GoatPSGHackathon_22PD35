@@ -80,22 +80,40 @@ Custom modules for FleetManager and TrafficManager
 ## Project Structure
 
 fleet_management_system/
+
 ├── data/
+
 │   └── nav_graph.json  # JSON file describing the environment (vertices and lanes)
+
 ├── src/
+
 │   ├── models/
+
 │   │   ├── nav_graph.py  # Code to parse and represent the navigation graph
+
 │   │   └── robot.py  # Robot behaviors and attributes
+
 │   ├── controllers/
+
 │   │   ├── fleet_manager.py  # Manages robot tasks and states
+
 │   │   └── traffic_manager.py  # Handles traffic negotiation and collision avoidance
+
 │   ├── gui/
+
 │   │   └── fleet_gui.py  # Interactive GUI using Tkinter
+
 │   ├── utils/
+
 │   │   └── helpers.py  # Supporting functions like pathfinding algorithms
+
 │   ├── logs/
+
 │   │   └── fleet_logs.txt  # Log file for robot actions and statuses
+
 │   └── main.py  # Application entry point
-├── requirements.txt  # Dependencies
+
+├── requirements.txt 
+
 └── README.md  # Project documentation
 
