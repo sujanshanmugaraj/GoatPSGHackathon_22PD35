@@ -5,3 +5,9 @@
 2025-03-30 20:11:48,676 - INFO - Robot Robot-1: Status=task complete, Position=C, Destination=N/A
 2025-03-30 20:11:48,676 - INFO - Robot Robot-2: Status=task complete, Position=D, Destination=N/A
 2025-03-30 20:11:48,676 - INFO - Simulation completed.
+2025-03-30 21:04:49,775 - INFO - Starting simulation...
+2025-03-30 21:04:49,776 - DEBUG - Robot Robot-1 moved to A
+2025-03-30 21:04:49,776 - DEBUG - Robot Robot-2 moved to B
+2025-03-30 21:04:50,800 - INFO - Robot Robot-1: Status=task complete, Position=C, Destination=N/A
+2025-03-30 21:04:50,800 - INFO - Robot Robot-2: Status=task complete, Position=D, Destination=N/A
+2025-03-30 21:04:50,800 - INFO - Simulation completed.
