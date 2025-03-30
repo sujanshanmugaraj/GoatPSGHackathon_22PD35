@@ -136,7 +136,8 @@ Logs are saved to the `logs/` directory and will be helpful for tracking the pro
 ## 5. **Stopping the Simulation**
 To stop the simulation, you can simply close the GUI window. The simulation will automatically stop, and the final logs will be saved.
 
----
+
+
 
 ## Navigation Graph (nav_graph.json)
 
@@ -232,5 +233,60 @@ In the image, we can see a successful run of the Fleet Management System simulat
    The simulation log includes critical information, such as granted lane access, path choices, and robot movements, which ensures full traceability and monitoring of each robot's progress throughout the simulation.
 
 
-  
+![image](https://github.com/user-attachments/assets/fb3f086a-bd84-42ea-bb6f-8c5fbf372ff4)
+
+
+**Simulation Progress:**
+
+- **Robot-1** has successfully completed its task at **C**.
+- **Robot-2** has successfully completed its task at **D**.
+
+**Robot-3** Actions:
+- **Robot-3** was granted access to the lane from **C to E**.
+- The system determined that **Robot-3**'s starting point **E** is the same as the destination **E**, and thus the robot completed the task instantly.
+- **Robot-3** has completed its task at **E** without requiring movement, as the start and destination were the same.
+
+**Robot-4** Actions:
+- **Robot-4** was granted access to the lane from **D to F**.
+- The system determined that **Robot-4**'s starting point **F** is the same as the destination **F**, so the robot completed the task without needing to move.
+- **Robot-4** has completed its task at **F**.
+
+**Key Observations:**
+- The system accurately logs the successful completion of tasks.
+- If a robot's start and destination are the same, the task is completed immediately without movement.
+- The simulation demonstrates the ability to handle multiple robots and tasks concurrently, ensuring smooth operation and task completion.
+
+
+![image](https://github.com/user-attachments/assets/bc3999bb-f8f9-4db8-8cce-3c1794056d01)
+
+
+**Simulation Summary:**
+
+- **Robot-4** successfully completed its task at **F**.
+- **Robot-1** has successfully completed its task at **C**.
+- **Robot-2** has successfully completed its task at **D**.
+- **Robot-3** has successfully completed its task at **E**.
+- **Robot-4** again successfully completed its task at **F**.
+
+**Simulation Reset:**
+- The simulation was reset, and all previously completed tasks were cleared.
+
+**Post-Reset:**
+- After the reset, **Robot-1**, **Robot-2**, **Robot-3**, and **Robot-4** all re-completed their respective tasks at **C**, **D**, **E**, and **F**, respectively.
+
+
+![image](https://github.com/user-attachments/assets/ccb75c55-b83f-479a-bdfc-1764ddd62296)
+
+
+
+**Simulation Summary:**
+
+- **Robot-2** successfully completed its task at **D**.
+- **Robot-1** successfully completed its task at **C**.
+- **Robot-2** has again successfully completed its task at **D**.
+- **Robot-3** was successfully spawned at **E**.
+- **Robot-3** was spawned again at **E** (indicating either a reinitialization or a second instance).
+- **Robot-1** again completed its task at **C**.
+- **Robot-2** completed its task at **D** once more.
+- **Robot-1** completed its task at **C** again.
 
