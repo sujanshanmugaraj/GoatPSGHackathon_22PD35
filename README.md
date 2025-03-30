@@ -67,9 +67,6 @@ Custom modules for FleetManager and TrafficManager
 
 ![image](https://github.com/user-attachments/assets/9231a901-bcf7-4c68-b87f-34ed99f45bf1)
 
-Here's a section on how to use the Fleet Management System, which you can add to your README or documentation:
-
----
 
 ## How to Use the Fleet Management System?
 
