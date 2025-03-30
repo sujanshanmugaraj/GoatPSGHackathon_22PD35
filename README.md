@@ -175,6 +175,26 @@ Dijkstra's Algorithm: Used for pathfinding.
 
 Open-source libraries: Various libraries for logging and pathfinding.
 
+## Screenshots and Visuals
+
+![image](https://github.com/user-attachments/assets/ef9c7c6a-50f7-43af-8ceb-33626ca24a55)
+
+
+**Simulation Progress and Log Output:**
+
+In the image, we can see a successful run of the Fleet Management System simulation:
+
+1. **Robot Spawning & Task Assignment**:  
+   Robots are spawned at vertices A and B, with tasks assigned to navigate to destinations C and D, respectively. The system dynamically assigns paths and manages the traffic negotiation process between robots.
+
+2. **Path Selection & Movement**:  
+   Robot-1 and Robot-2 move through the network, avoiding collisions and following their assigned paths. The log displays their progress as they move from one node to another, with real-time updates on their position and task completion status.
+
+3. **Task Completion & Status Updates**:  
+   Upon completing their tasks, each robot’s status is updated to "task complete," and their positions are logged. The simulation ends with both robots having successfully completed their tasks.
+
+4. **Real-Time Logging**:  
+   The simulation log includes critical information, such as granted lane access, path choices, and robot movements, which ensures full traceability and monitoring of each robot's progress throughout the simulation.
 
 
   
