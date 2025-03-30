@@ -73,10 +73,10 @@ Here's a section on how to use the Fleet Management System, which you can add to
 
 ## How to Use the Fleet Management System
 
-# 1. **System Setup and Installation**
+## 1. **System Setup and Installation**
 Before you can start using the Fleet Management System, you need to set it up on your local machine. Follow these steps:
 
-## Install Dependencies:
+### Install Dependencies:
 Make sure you have Python 3.7+ installed. Then, install the required dependencies using `pip`. 
 
 ```bash
@@ -106,21 +106,21 @@ To start the Fleet Management System, follow these steps:
 
 The GUI will open in a new window, showing a visual representation of the navigation graph (nodes and paths). Below are the steps to interact with the system:
 
-## **Spawning Robots**
+### **Spawning Robots**
 1. Click on any vertex (node) to spawn a robot.
 2. A new robot will appear at that node, and a unique ID will be assigned to it.
 
-## **Assigning Tasks to Robots**
+### **Assigning Tasks to Robots**
 1. Select a robot by clicking on it in the GUI.
 2. After selecting the robot, click on a destination node (another vertex) to assign a task for the robot to move to that location.
 3. The robot will start moving toward the assigned destination immediately.
 
-## **Traffic Negotiation**
+### **Traffic Negotiation**
 1. As the robots move, they will negotiate traffic by avoiding collisions with each other.
 2. If a robot encounters a blocked path (e.g., another robot is already using the same lane), it will wait until the path becomes clear.
 3. The system will visualize the waiting robots and their current statuses in real-time.
 
-## **Monitoring Robot Status**
+### **Monitoring Robot Status**
 1. The status of each robot (moving, waiting, charging, task complete) will be updated in the GUI and logged in the system.
 2. You can monitor the task progress through the GUI and the log outputs in the terminal.
 
